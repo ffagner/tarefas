@@ -1,0 +1,32 @@
+/* Instanciação é um processo muito comum na programação orientada a objetos. Isso porque, de certa
+forma, instanciar é o mesmo que realizar uma “cópia” de algo. Dessa forma, analise o código a seguir,
+identifique as linhas tracejadas (3 e 9) e escreva o código que falta para que ele funcione
+perfeitamente. Uma dica, a classe que você utilizará nesse código se chama User e o método que
+você precisará para conexão com banco de dados se chama conectar*/
+
+código php
+
+<?php
+require_once 'usuarios.php';
+// a proxima linha foi criada, estava incompleta 
+$u = new User();
+
+if (isset($_POST['usuario'])){
+$user = addslashes($_POST['usuario']);
+$passwd = addslashes($_POST['senha']);
+if (!empty($usuario) && !empty($senha)){
+// a proxima linha foi criada, estava incompleta
+$u->conectar("nomeDB", "localhost", "user", "password");
+
+if ($u->msgErro == ""){
+if (!$u->logar($user, $passwd)){
+echo "Credenciais incorretas!";
+}
+} else{
+echo "Erro: " . $u->msgErro;
+}
+} else{
+echo "Preencha todos os campos obrigatórios!";
+}
+}
+?>
